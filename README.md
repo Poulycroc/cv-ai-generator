@@ -15,7 +15,7 @@ Built with Vite + Vue 3 + TypeScript. Outputs pixel-perfect A4 PDFs via Playwrig
 
 ```bash
 # Clone and install
-git clone <repo-url>
+git clone https://github.com/Poulycroc/cv-ai-generator.git
 cd cvgenerator
 pnpm install
 
