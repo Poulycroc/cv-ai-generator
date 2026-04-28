@@ -1,0 +1,28 @@
+name: Jane Doe
+birthdate: March 15, 1992
+address: Brussels, Belgium
+phone: "+32 400 00 00 00"
+email: jane.doe@example.com
+website: janedoe.dev
+qr_url: https://janedoe.dev
+
+languages:
+  - name: English
+    level: Native
+    bar: 100
+  - name: French
+    level: Professional proficiency
+    bar: 80
+
+mobility: Driving license B
+
+interests:
+  - Open Source
+  - Rock Climbing
+  - Board Games
+  - Photography
+
+# These reference files in content/shared/
+# Replace with your own photo and logo
+photo: profile-pic.jpg
+logo: cv_logo.svg

@@ -1,0 +1,19 @@
+lang: en
+
+keywords:
+  - Full Stack Developer
+  - React
+  - TypeScript
+  - Node.js
+  - PostgreSQL
+  - Docker
+  - AWS
+  - CI/CD
+  - Agile
+  - SaaS
+
+sections:
+  title: ./title.md
+  experience: ./experience.md
+  skills: ./skills.md
+  education: ./education.md

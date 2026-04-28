@@ -1,0 +1,14 @@
+node_modules
+dist
+*.local
+.claude
+docs/superpowers
+
+# Personal content — not shared on GitHub
+# Replace with your own files (see content/examples/ for templates)
+content/shared/sidebar.yml
+content/shared/profile-pic.*
+content/shared/cv_logo.svg
+content/shared/experience-database.md
+content/shared/preferences.md
+content/versions/

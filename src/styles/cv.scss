@@ -1,0 +1,345 @@
+:root {
+  --color-text-w: #ffffff;
+
+  --color-header-bg: #3d4f5f;
+  --color-header-text: var(--color-text-w);
+  --color-sidebar-bg: var(--color-header-bg);
+  --color-sidebar-text: var(--color-text-w);
+  --color-sidebar-label: #d0d0d0;
+  --color-main-bg: var(--color-text-w);
+  --color-main-text: #333333;
+  --color-accent: #3d4f5f;
+  --color-dates: #666666;
+  --color-keywords: var(--color-text-w);
+  --color-bar-bg: #d0d0d0;
+  --color-bar-fill: #3d4f5f;
+
+  --font-primary:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --sidebar-width: 52mm;
+  --main-width: calc(var(--page-width) - var(--sidebar-width));
+  --container-padding: 2mm 5mm 5mm 5mm;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: var(--font-primary);
+  font-size: 9pt;
+  line-height: 1.4;
+  color: var(--color-main-text);
+  background: #e0e0e0;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    background: white;
+  }
+}
+
+// Page container
+.cv-page {
+  width: var(--page-width);
+  height: var(--page-height);
+  margin: 0 auto;
+  background: var(--color-main-bg);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @media print {
+    box-shadow: none;
+    margin: 0;
+  }
+}
+
+// Hidden ATS keywords
+.cv-keywords {
+  color: var(--color-main-bg);
+  font-size: 1px;
+  line-height: 1;
+  position: absolute;
+  bottom: auto;
+  top: 0;
+  right: 0;
+  pointer-events: none;
+  user-select: text;
+  z-index: -1;
+}
+
+// Two-column body — full page height
+.cv-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+// ============================================
+// SIDEBAR (left column)
+// ============================================
+.cv-sidebar {
+  width: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-header-bg);
+  font-size: 8pt;
+
+  // Name banner (dark bg)
+  &__banner {
+    color: var(--color-header-text);
+    padding: var(--container-padding);
+  }
+  &__picture {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 4mm;
+    img {
+      height: 100%;
+      margin: 0 auto 0 5mm;
+      display: block;
+    }
+  }
+  &__name {
+    font-size: 18pt;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
+
+  // Info section (grey background)
+  &__info {
+    padding: 4mm 5mm;
+    flex: 1;
+    color: var(--color-header-text);
+  }
+
+  &__section {
+    margin-bottom: 3mm;
+  }
+
+  &__label {
+    font-size: 7pt;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--color-sidebar-label);
+    margin-bottom: 0.5mm;
+    letter-spacing: 0.3px;
+  }
+
+  &__value {
+    color: var(--color-sidebar-text);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  &__link {
+    color: var(--color-sidebar-text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  // Languages
+  &__lang-item {
+    margin-bottom: 1mm;
+  }
+
+  &__lang-name {
+    font-weight: 600;
+    font-size: 8pt;
+  }
+
+  &__lang-level {
+    font-size: 7pt;
+    padding-left: 1mm;
+    color: var(--color-sidebar-label);
+  }
+
+  // Interests
+  &__interests {
+    font-size: 8pt;
+    font-weight: 600;
+    color: var(--color-sidebar-text);
+  }
+
+  // Footer (logo + QR)
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    background: var(--color-sidebar-bg);
+    align-items: flex-end;
+    padding: 0 5mm 5mm 5mm;
+  }
+
+  &__logo,
+  &__qr {
+    width: 14mm;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+  &__qr svg path:last-child {
+    stroke: var(--color-header-bg);
+  }
+}
+
+// ============================================
+// MAIN CONTENT (right column)
+// ============================================
+.cv-main {
+  width: var(--main-width);
+  padding: var(--container-padding);
+  overflow: hidden;
+
+  &__title {
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 3mm;
+  }
+
+  &__summary {
+    font-size: 8pt;
+    line-height: 1.5;
+    color: var(--color-main-text);
+    margin-bottom: 4mm;
+
+    p {
+      margin-bottom: 1.5mm;
+    }
+  }
+}
+
+// Section title
+.cv-section-title {
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--color-accent);
+  border-bottom: 0.5px solid var(--color-accent);
+  padding-bottom: 1mm;
+  margin-bottom: 2mm;
+}
+
+// Experience
+.cv-experience {
+  margin-bottom: 3mm;
+
+  &__entry {
+    margin-bottom: 2mm;
+  }
+
+  &__role {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: var(--color-main-text);
+  }
+
+  &__dates {
+    font-weight: 400;
+    color: var(--color-dates);
+    font-size: 8pt;
+  }
+
+  &__company {
+    font-style: italic;
+    font-size: 8pt;
+    color: var(--color-dates);
+    margin-bottom: 0.5mm;
+  }
+
+  &__bullets {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  &__bullet {
+    padding-left: 3mm;
+    position: relative;
+    font-size: 7.5pt;
+    line-height: 1.4;
+    margin-bottom: 0.3mm;
+
+    &::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+  }
+}
+
+// Skills
+.cv-skills {
+  margin-bottom: 3mm;
+
+  &__grid {
+    display: flex;
+    gap: 6mm;
+  }
+
+  &__column {
+    flex: 1;
+  }
+
+  &__category {
+    margin-bottom: 2mm;
+  }
+
+  &__category-name {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 0.5mm;
+  }
+
+  &__items {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    font-size: 7.5pt;
+    line-height: 1.4;
+  }
+}
+
+// Education
+.cv-education {
+  &__entry {
+    margin-bottom: 1.5mm;
+  }
+
+  &__school {
+    font-size: 8.5pt;
+    font-weight: 700;
+  }
+
+  &__program {
+    font-size: 8pt;
+  }
+
+  &__dates {
+    font-size: 7.5pt;
+    color: var(--color-dates);
+  }
+}
