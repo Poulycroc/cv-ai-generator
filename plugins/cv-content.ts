@@ -110,8 +110,9 @@ export function cvContentPlugin(version: string): Plugin {
       // Load sidebar with optional overrides
       const sidebar = loadSidebar(sharedDir, config.sidebar_overrides)
 
-      // Generate QR code
-      sidebar.qrSvg = await generateQrSvg(sidebar.qr_url)
+      // Generate QR code with locale suffix
+      const qrUrl = sidebar.qr_url.replace(/\/+$/, '') + '/' + config.lang
+      sidebar.qrSvg = await generateQrSvg(qrUrl)
 
       // Parse each section
       const titleRaw = fs.readFileSync(path.resolve(versionDir, config.sections.title), 'utf-8')
