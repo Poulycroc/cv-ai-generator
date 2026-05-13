@@ -66,6 +66,22 @@ export interface EducationData {
   entries: EducationEntry[]
 }
 
+export interface CoverLetterSender {
+  name: string
+  address: string
+  email: string
+  website: string
+}
+
+export interface CoverLetterData {
+  sender: CoverLetterSender
+  recipient: string
+  city: string
+  date: string
+  bodyHtml: string
+  bodyText: string
+}
+
 export interface CvContent {
   sidebar: SidebarData
   config: VersionConfig

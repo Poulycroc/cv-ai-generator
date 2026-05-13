@@ -13,7 +13,8 @@ Markdown-driven CV/resume builder. Content in YAML/markdown, rendered as A4 HTML
 
 - `pnpm dev` — preview default version
 - `CV_VERSION=<name> pnpm dev` — preview specific version
-- `pnpm generate <name>` — generate PDF to `content/versions/<name>/generated/cv.pdf`
+- `pnpm generate <name>` — generate CV PDF to `content/versions/<name>/generated/`
+- `pnpm generate:cover-letter <name>` — generate cover letter PDF + TXT to `content/versions/<name>/generated/`
 
 ## Content Structure
 
@@ -31,7 +32,8 @@ content/
       experience.md      # selected work experience for this version
       skills.md          # technical skills, reordered for this version
       education.md       # diplomas/education
-      generated/         # PDF output folder
+      cover-letter.md    # optional — cover letter content
+      generated/         # PDF + TXT output folder
 ```
 
 ## Creating a New CV Version
@@ -92,6 +94,25 @@ sections:
 
 #### education.md
 - Usually the same across versions unless offer requires specific highlighting
+
+#### cover-letter.md (optional)
+Only create when the user requests a cover letter.
+
+```markdown
+---
+recipient: Company Name
+city: City
+date: May 13, 2026
+---
+
+Cover letter body in markdown. Multiple paragraphs supported.
+```
+
+- Frontmatter: `recipient` (company), `city`, `date`
+- Body: tailored letter content matching the offer's tone and requirements
+- Sender info (name, address, email, website) is pulled from `sidebar.yml` + overrides
+- Generate with: `pnpm generate:cover-letter <version>`
+- Outputs both PDF (styled A4 letter) and TXT (plain text for textarea paste) to `generated/`
 
 ## Important Rules
 
