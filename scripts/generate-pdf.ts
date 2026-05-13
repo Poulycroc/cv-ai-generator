@@ -3,6 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import { chromium } from 'playwright'
 import path from 'path'
 import fs from 'fs'
+import matter from 'gray-matter'
+import { parse as parseYaml } from 'yaml'
 import { cvContentPlugin } from '../plugins/cv-content'
 
 async function generate(version: string) {
@@ -30,7 +32,33 @@ async function generate(version: string) {
       fs.mkdirSync(outputDir, { recursive: true })
     }
 
-    const outputPath = path.join(outputDir, 'cv.pdf')
+    const contentDir = path.resolve(process.cwd(), 'content')
+    const versionDir = path.join(contentDir, 'versions', version)
+    const configRaw = fs.readFileSync(path.join(versionDir, 'config.yml'), 'utf-8')
+    const config = parseYaml(configRaw)
+    const sidebarRaw = fs.readFileSync(path.join(contentDir, 'shared', 'sidebar.yml'), 'utf-8')
+    const sidebar = parseYaml(sidebarRaw)
+    if (config.sidebar_overrides) Object.assign(sidebar, config.sidebar_overrides)
+    const titleRaw = fs.readFileSync(path.resolve(versionDir, config.sections.title), 'utf-8')
+    const { data: titleData } = matter(titleRaw)
+
+    const namePart = (sidebar.name as string)
+      .split(' ')
+      .reverse()
+      .join('_')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+    const jobPart = (titleData.jobTitle as string)
+      .split('–')[0]
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '_')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+    const filename = `cv-${namePart}-${jobPart}.pdf`
+
+    const outputPath = path.join(outputDir, filename)
 
     const browser = await chromium.launch()
     const page = await browser.newPage()

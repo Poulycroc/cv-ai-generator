@@ -3,6 +3,7 @@ dist
 *.local
 .claude
 docs/superpowers
+content/shared/.DS_Store
 
 # Personal content — not shared on GitHub
 # Replace with your own files (see content/examples/ for templates)
